@@ -1,0 +1,5 @@
+name = "John Villanueva"
+SID = "23664673"
+email = "johnnyboyv@berkeley.edu"
+github_name = "John-Villanueva"
+status = "enrolled"
