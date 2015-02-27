@@ -116,14 +116,13 @@ recipeConversion <- function(recipe){
 # -- The bootstrap variance is the sample variance of mu_1, mu_2, ..., mu_B
 
 bootstrapVarEst <- function(x, B){
-  data.means <- data.frame("mu_i"=c(),"value"=c())
+  means_vector <- c()
   for(i in 1:B){
     set.seed(69069)
     resample <- sample(x,size=length(x),replace=TRUE)
-    data.means$mu_i[i] <- paste("mu_",i,sep="")
-    data.means$value[i] <- mean(resample)
+    means_vector <- cbind(means_vector,mean(resample))
   }
-  MeanVarEst <- sqrt(var(data.means$value))
+  MeanVarEst <- var(means_vector)
   return(MeanVarEst)
 }
 
@@ -145,8 +144,14 @@ bootstrapVarEst <- function(x, B){
 #     for this reduced sample calculate the sample mean (get mu_1, mu_2, ..., mu_n)
 # -- The jackknife variance is the sample variance of mu_1, mu_2, ..., mu_n
 
-jackknifeVarEst <- fuction(x){
-
+jackknifeVarEst <- function(x){
+  means_vector <- c()
+  for(i in 1:length(x)){
+    mu <- mean(x[-i])
+    means_vector <- c(means_vector,mu)
+  }
+  MeanVarEst <- var(means_vector)
+  return(MeansVarEst)
 }
 
 #### Function #4c
@@ -161,8 +166,13 @@ jackknifeVarEst <- fuction(x){
 
 # Note: this function calls the previous two functions.
 
-samplingVarEst <- function(  ){
-
+samplingVarEst <- function(x,type="bootstrap",B){
+  if(type=="jackknife"){
+    jackknifeVarEst(x)
+  }
+  if(type=="bootstrap"){
+    bootstrapVarEst(x,B)
+  }
 }
 
 
