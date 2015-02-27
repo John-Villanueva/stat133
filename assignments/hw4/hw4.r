@@ -8,14 +8,15 @@
 
 # Input variable:
 # <data.list>: a list whose elements are vectors of varying length
+testlist1 <- list(c(1,1,1,1),c(1,1,1,1,1,1,1),c(1,1,1))
 
 # Output variable:
 # <element.lengths>: a numeric vector whose entries are the lengths of each
 #   element of <data.list>
 
 listLengths <- function(data.list) {
-
-    # your code here
+  
+  lapply(data.list,length)
 
 }
 
@@ -25,21 +26,35 @@ listLengths <- function(data.list) {
 # Input variable :
 # <x> : a numeric vector of length n
 # <k> : an integer
-
+samplevector <- c(1,2,3,4)
+samplevector2 <- c(1,2,3,4,5)
 # Output variable
 # <x.powers> : A matrix of size [n x k] where the first column is x, the second column x^2, the third column x^4, etc.
 #              the column names should be : "x", "x^2", "x^3" etc.
 
-powers <- function(x, k){
-
+powers <- function(x, k) {
+  i <- 2
+  newmatrix <- x
+  while(i<=k){
+    addColMatrix <- x^i
+    newmatrix <- rbind(newmatrix,addColMatrix)
+    rownames(newmatrix)[i] <- c(paste("x^",i, sep=""))
+    i <- i + 1
+  }
+  newmatrix <- t(newmatrix)
+  colnames(newmatrix)[1] <- c("x")
+  return(newmatrix)
 }
-
  
 #### Function #3
 #### Implement the function "recipeConversion"
 
 # Input variable:
 # <recipe> : A data frame with three columns named "amount", "unit" and "ingredient"
+ingredient <- c("Sugar","Miso Paste","Onion Powder","Spicy Chicken Breast","Milk")
+amount <- c(2.5,3,27,1,400)
+unit <- c("cups","oz","grams","cup","ml")
+sample.recipe <- data.frame(amount,unit,ingredient)
 
 # Output variable:
 # <recipe.metric> : A data frame with three columns where cups have been converted to ml and ounces to grams.
@@ -64,9 +79,20 @@ powers <- function(x, k){
 
 # Put your code here
 recipeConversion <- function(recipe){
-
+    if (any(colnames(recipe)!=c("amount","unit","ingredient")))
+         stop("Column must be amount, unit, or ingredient")
+    recipe$amount[match("cups", recipe$unit)] <- recipe$amount[match("cups",recipe$unit)]*236.6
+    recipe$unit[match("cups",recipe$unit)] <- c("ml")
+    recipe$amount[match("cup",recipe$unit)] <- recipe$amount[match("cup",recipe$unit)]*236.6
+    recipe$unit[match("cup",recipe$unit)] <- c("ml")
+    recipe$amount[match("oz",recipe$unit)] <- recipe$amount[match("oz",recipe$unit)]*28.3
+    recipe$unit[match("oz", recipe$unit)] <- c("grams")
+    round5 <- function(measurement){
+      round(measurement/5)*5
+    }
+    recipe$amount <- sapply(recipe$amount,round5)
+    return(recipe)
 }
-
 
 #### Function #4a
 # Implement the function "bootstrapVarEst"
@@ -90,7 +116,15 @@ recipeConversion <- function(recipe){
 # -- The bootstrap variance is the sample variance of mu_1, mu_2, ..., mu_B
 
 bootstrapVarEst <- function(x, B){
-
+  data.means <- data.frame("mu_i"=c(),"value"=c())
+  for(i in 1:B){
+    set.seed(69069)
+    resample <- sample(x,size=length(x),replace=TRUE)
+    data.means$mu_i[i] <- paste("mu_",i,sep="")
+    data.means$value[i] <- mean(resample)
+  }
+  MeanVarEst <- sqrt(var(data.means$value))
+  return(MeanVarEst)
 }
 
 #### Function #4b
