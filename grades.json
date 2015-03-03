@@ -1,0 +1,23 @@
+{
+    "login": "John-Villanueva", 
+    "url": "git@github.com:John-Villanueva/stat133.git", 
+    "name": "John Villanueva", 
+    "email": "johnnyboyv@berkeley.edu", 
+    "github_name": "John-Villanueva", 
+    "status": "enrolled", 
+    "grades": {
+        "hw1": {
+            "note": "", 
+            "hash": "72b90f8cee081332f462ca49112776ac7c2192fd", 
+            "earned": 0, 
+            "possible": 20, 
+            "penalty": 0, 
+            "parts": {
+                "hw1": {
+                    "possible": 20, 
+                    "earned": 0
+                }
+            }
+        }
+    }
+}
