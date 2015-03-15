@@ -1,0 +1,38 @@
+BML Simulation Study Report
+John Villanueva
+Stat 133 Section 204 Spring 2015
+
+10x10 Matrix Simulation Stats
+
+                    p=0.1 p=0.3    p=0.5    p=0.6    p=0.7  p=0.8  p=0.9
+Gridlock Frequency      0     0    0.425    0.901    0.996      1      1
+Free Flow Frequency     1     1    0.575    0.099    0.004      0      0
+Average GL Timesteps  NaN   NaN 229.7812 93.51498 29.72791 17.644 10.084
+
+
+
+20x20 Matrix Simulation Stats
+
+                     p=0.1 p=0.3    p=0.5    p=0.6  p=0.7  p=0.8  p=0.9
+Gridlock Frequency       0     0    0.795    0.999      1      1      1
+Free Flow Frequency      1     1    0.205    0.001      0      0      0
+Average GL Timesteps   NaN   NaN 256.7132 83.55856 48.936 30.104 16.246
+
+
+
+50x50 Matrix Simulation
+
+                     p=0.1 p=0.3    p=0.5    p=0.6  p=0.7  p=0.8  p=0.9
+Gridlock Frequency       0     0    0.938    0.999      1      1      1
+Free Flow Frequency      1     1    0.062    0.001      0      0      0
+Average GL Timesteps   NaN   NaN 293.5672 157.0561 93.192 50.502 25.268
+
+
+
+The Biham-Middleton-Levine Traffic Model was simulated in three different matrix sizes (50x50, 20x20, and 10x10 matrices) at 7 different traffic densities (0.1, 0.3, 0.5, 0.6, 0.7, 0.8, and 0.9) for 1000 trials each. If a matrix was able to maneuver through 1000 timesteps, then that traffic model was considered to perpetually remain in free-flow traffic.
+
+General trends show that as the matrix size grew bigger, the average timesteps it took to reach gridlock increases; for example at density p=0.7, the average timesteps to gridlock for the 10x10, 20x20, and 50x50 matrices are 29.7, 48.9, and 93.192 timesteps respectively. This trend shows that traffic takes longer to develop when the gridded city is physically larger, even while keeping denisty constant. Thus, bigger cities make for slower occurances of gridlock.
+
+However, despite the slower occurences of gridlock in larger cities, smaller cities still display less frequent occurences of gridlock. For example at p=0.5, the 10x10, 20x20, and 50x50 matrices have gridlock frequencies of 0.425, 0.795, 0.938 respectively. Smaller cities, therefore, are less likely to experience gridlock.
+
+Other general trends include how densities of 0.7, 0.8, 0.9 virtually always result in gridlock, while traffic densities of 0.1 and 0.3 always result in free flowing traffic.
