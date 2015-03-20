@@ -27,7 +27,20 @@
 #                 the entries are 0 for days where the doctor is a
 #                 non-adopter, else 1 (so once a row turns to 1 it stays as 1).
 
+initial.doctors <- sample(0:1,size=30,replace=TRUE,prob=c(0.9,0.1))
+
 sim.doctors <- function(initial.doctors, n.doctors, n.days, p){
+  has_adopted <- matrix(, nrow=n.doctors, ncol=n.days)
+  for(i in 1:n.days){
+    meeting.docs <- sample(1:n.doctors,size=2,replace=FALSE)
+    docs.adopt <- c(initial.doctors[meeting.docs[1]],initial.doctors[meeting.docs[2]])
+    if (docs.adopt[1] != docs.adopt[2]){
+      persuasion <- sample(0:1,size=1,prob=c(1-p,p))
+      initial.doctors <- replace(initial.doctors,meeting.docs[docs.adopt==0],persuasion)}
+    has_adopted[,i] <- initial.doctors
+    }
+  return(has_adopted)
+}
 
   # Set up the output variable, define it as a matrix then use initial.doctors
   # to set the first column (day)
@@ -39,8 +52,6 @@ sim.doctors <- function(initial.doctors, n.doctors, n.days, p){
 
   # return the output
 
-}
-
 # When you test your function you have to generate <initial.doctors> and
 # pick values for the other input parameters.
 
@@ -51,3 +62,19 @@ set.seed(42)
 # on y-axis : the number of doctors that have already adopted the drug, on that day
 # Put all 5 lines in one figure (e.g. use first plot() then lines() for the subsequent lines)
 
+twoMat <- sim.doctors(initial.doctors,30,50,0.2)
+fourMat <- sim.doctors(initial.doctors,30,50,0.4)
+fiveMat <- sim.doctors(initial.doctors,30,50,0.5)
+sevenMat <- sim.doctors(initial.doctors,30,50,0.7)
+nineMat <- sim.doctors(initial.doctors,30,50,0.9)
+
+plot(x=1:50,y=apply(twoMat,2,sum),type="l",
+     ylim=range(0,20),
+     main="Gradual Adopting of a Drug by Doctors",
+     ylab="Number of Doctors",
+     xlab="Days",
+     col="Red")
+lines(x=1:50,y=apply(fourMat,2,sum))
+lines(x=1:50,y=apply(fiveMat,2,sum),col="Green")
+lines(x=1:50,y=apply(sevenMat,2,sum),col="Orange")
+lines(x=1:50,y=apply(nineMat,2,sum),col="Purple")
