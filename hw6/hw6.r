@@ -78,3 +78,5 @@ lines(x=1:50,y=apply(fourMat,2,sum))
 lines(x=1:50,y=apply(fiveMat,2,sum),col="Green")
 lines(x=1:50,y=apply(sevenMat,2,sum),col="Orange")
 lines(x=1:50,y=apply(nineMat,2,sum),col="Purple")
+legend("topleft",c("0.2","0.4","0.5","0.7","0.9"),title="Conversion Probability",
+       fill=c("red","black","green","orange","purple"))
