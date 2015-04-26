@@ -1,0 +1,4 @@
+oneBoot: wrong understanding of fit  -2
+repBoot: ignored case using genBootR (fit is always null in your case)  -4
+
+Score: 14/20
