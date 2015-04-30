@@ -20,7 +20,12 @@ set.seed(123456)
 # We've set the default inputs to k=2 and B=100
 
 dice_sum <- function(k=2, B=100){
-
+  roll <- c()
+  for(i in i:(k*B)){
+    s <- sample(1:6,size=1)
+    roll <- c(roll,s)
+  }
+  return(sum(c))
 }
 
 #### String manipulation
