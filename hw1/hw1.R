@@ -41,7 +41,7 @@
 # << y >> : a vector of length 100 which has the even numbers from 2 to 200.
 # For clarity put your code here, directly below the 
 
-y = 2*[1:20]
+# y = 2*[1:20]
 
 # Create the variable
 # << z >> : a vector of length 20 with character entries, "hw1", "hw2", ..., "hw20"
@@ -96,10 +96,10 @@ family.30y68i = subset(family,age>30,height<68)
 # Note: the dataframe has weight in lbs and height in in as required.
 # Create a new variable 
 # << bmi >> : a vector with the BMI of each family member 
-BMI = c(family$weight/family$height^2 * 703)
+bmi = c(family$weight/family$height^2 * 703)
 
 # Create a new data frame
 # << family2 >> : family with an added column of BMI, with column name bmi
-family2 = cbind(family,BMI)
+family2 = cbind(family,bmi)
 
 ##################################################################################
